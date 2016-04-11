@@ -41,11 +41,13 @@ def get_new_yaks():
   for yak in yaks:
     cur_yak = session.query(Yak).filter_by(yid=yak.message_id).first()
     if not cur_yak:
-      print(yak.message)
-      cur_yak = Yak(yid=yak.message_id, time=yak.time, text=yak.message, score=yak.number_of_likes, handle=yak.nickname)
+      cur_yak = Yak(yid=yak.message_id, time=yak.time, text=yak.message, score=yak.number_of_likes, handle=yak.nickname or '')
+      print('NEW:', repr(cur_yak))
       session.add(cur_yak)
     else:
-      cur_yak.score = yak.number_of_likes
+      if cur_yak.score != yak.number_of_likes:
+        cur_yak.score = yak.number_of_likes
+        print('MOD:', repr(cur_yak))
 
   session.commit()
 
