@@ -22,8 +22,9 @@ def get_new_yaks():
       session.add(cur_yak)
     else:
       if cur_yak.score != yak.number_of_likes:
-        print('{: =+4}:'.format(yak.number_of_likes - cur_yak.score), repr(cur_yak))
+        diff = yak.number_of_likes - cur_yak.score
         cur_yak.score = yak.number_of_likes
+        print('{: =+4}:'.format(diff), repr(cur_yak))
 
   session.commit()
 
