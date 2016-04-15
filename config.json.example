@@ -1,0 +1,8 @@
+{
+  "id": "--------------------------------",
+  "long": 0.0,
+  "lat": 0.0,
+  "country": "US",
+  "phone": "1----------",
+  "db": "sqlite:////absolute/path/to/file.db"
+}
