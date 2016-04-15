@@ -1,7 +1,7 @@
 import db
 import json
 
-from yikyak import yikyak
+from yikyakapi import yikyak
 
 with open('config.json') as fd:
   config = json.loads(fd.read())
