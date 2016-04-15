@@ -27,12 +27,17 @@ def mkdb():
 def mkstr(mc, yaks):
   res = mc.generateString()
   sim = 0.0
+  avg = 0.0
   for yak in yaks:
     new_sim = similar(res.split(), yak.split())
     if new_sim > sim:
       sim = new_sim
+    avg += new_sim
 
-  return res, sim
+  avg /= len(yaks)
+  avg *= 100
+
+  return res, sim, avg
 
 if args.num > 0:
   mc, yaks = mkdb()
@@ -40,12 +45,12 @@ if args.num > 0:
     sim = args.similarity
     yak = ''
     while sim >= args.similarity or len(yak.split()) < args.length:
-      yak, sim = mkstr(mc, yaks)
-    print('{:.2f} {}'.format(sim, yak))
+      yak, sim, avg = mkstr(mc, yaks)
+    print('{:.2f} {:.2f} {}'.format(sim, avg, yak))
 else:
   while True:
     mc, yaks = mkdb()
     sim = args.similarity
     while sim >= args.similarity or len(yak.split()) < args.length:
-      yak, sim = mkstr(mc, yaks)
-    print('{:.2f} {}'.format(sim, yak))
+      yak, sim, avg = mkstr(mc, yaks)
+    print('{:.2f} {:.2f} {}'.format(sim, avg, yak))
